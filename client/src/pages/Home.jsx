@@ -37,8 +37,7 @@ const Home = () => {
     return (
         <Container className="d-flex flex-column p-5 gap-3">
             <h2>
-                <b>User: </b>
-                {localStorage.getItem("user")}
+                <b>Find a track:</b>
             </h2>
             <Form.Control
                 type="search"

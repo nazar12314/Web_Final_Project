@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import { Home, Login, Signup, SpotifyAuth } from "./pages";
+import { CustomNavbar } from "./components";
 import { useAuth } from "./hooks";
 
 const code = new URLSearchParams(window.location.search).get("code");
@@ -21,19 +22,24 @@ const App = () => {
     }, [token]);
 
     return (
-        <Routes>
-            {isAuthorized ? (
-                localStorage.getItem("accessToken") ? (
-                    <Route path="/" element={<Home />} />
-                ) : (
-                    <Route path="/" element={<SpotifyAuth />} />
-                )
-            ) : (
-                <Route path="/" element={<Navigate to="/signup" />} />
+        <>
+            {isAuthorized && localStorage.getItem("accessToken") && (
+                <CustomNavbar />
             )}
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/login" element={<Login />} />
-        </Routes>
+            <Routes>
+                {isAuthorized ? (
+                    localStorage.getItem("accessToken") ? (
+                        <Route path="/" element={<Home />} />
+                    ) : (
+                        <Route path="/" element={<SpotifyAuth />} />
+                    )
+                ) : (
+                    <Route path="/" element={<Navigate to="/signup" />} />
+                )}
+                <Route path="/signup" element={<Signup />} />
+                <Route path="/login" element={<Login />} />
+            </Routes>
+        </>
     );
 };
 
