@@ -1,9 +1,33 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
+import SpotifyWebApi from "spotify-web-api-node";
+
+const generateJwtToken = (user) => {
+    return jwt.sign({ email: user.email, id: user._id }, "Secret token", {
+        expiresIn: "1h",
+    });
+};
+
+export const spotifyLogin = (req, res) => {
+    const code = req.body.code;
+
+    const spotifyApi = new SpotifyWebApi({
+        redirectUri: "http://localhost:3000",
+        clientId: "534fc98e66604af6b74ba67486f7590a",
+        clientSecret: "27b33c9bacc14b2486d03bd489ec3553",
+    });
+
+    spotifyApi
+        .authorizationCodeGrant(code)
+        .then((data) =>
+            res.status(200).json({ accessToken: data.body.access_token })
+        )
+        .catch(() => res.status(400));
+};
 
 export const loginUser = async (req, res) => {
-    const { email, password } = req.body;
+    const { email, password, code } = req.body;
 
     try {
         const user = await User.findOne({ email });
@@ -18,13 +42,9 @@ export const loginUser = async (req, res) => {
             return res.status(400).json({ message: "Invalid credentials!" });
         }
 
-        const token = jwt.sign(
-            { email: user.email, id: user._id },
-            process.env.JWT_SECRET,
-            { expiresIn: "1h" }
-        );
+        const token = generateJwtToken(user);
 
-        res.status(200).json({ user, token });
+        res.status(200).json({ token, user });
     } catch (error) {
         res.status(500).json({ message: "Something went wrong!" });
     }
@@ -54,13 +74,9 @@ export const registerUser = async (req, res) => {
 
         const user = await newUser.save();
 
-        const token = jwt.sign(
-            { email: user.email, id: user._id },
-            "Secret token",
-            { expiresIn: "1h" }
-        );
+        const token = generateJwtToken(user);
 
-        res.status(201).json({ user, token });
+        res.status(200).json({ token, user });
     } catch (error) {
         res.status(500).json({ message: "Something went wrong!" });
     }
