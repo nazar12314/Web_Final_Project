@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
-import { Home, Login, Signup, SpotifyAuth } from "./pages";
+import { Home, Login, Signup, SpotifyAuth, Playlists } from "./pages";
 import { CustomNavbar } from "./components";
 import { useAuth } from "./hooks";
 
@@ -38,6 +38,7 @@ const App = () => {
                 )}
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/playlists" element={<Playlists />} />
             </Routes>
         </>
     );

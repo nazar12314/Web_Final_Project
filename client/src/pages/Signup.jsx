@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 const Signup = () => {
     const [validated, setValidated] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
@@ -36,7 +37,7 @@ const Signup = () => {
                 navigate("/");
             }
         } catch (error) {
-            console.error(error);
+            setErrorMessage(error.response.data.message);
         }
 
         setValidated(true);
@@ -130,6 +131,7 @@ const Signup = () => {
                 </Form.Group>
                 <Button type="submit">Submit</Button>
                 <Link to="/login">Already have an account? Login</Link>
+                <p style={{ color: "red" }}>{errorMessage}</p>
             </Form>
         </Container>
     );

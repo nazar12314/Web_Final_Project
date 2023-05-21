@@ -10,6 +10,7 @@ const spotifyApi = new SpotifyWebApi({
 const Home = () => {
     const [search, setSearch] = useState("");
     const [searchResults, setSearchResults] = useState({});
+    const [responseError, setResponseError] = useState("");
 
     const accessToken = localStorage.getItem("accessToken");
     spotifyApi.setAccessToken(accessToken);
@@ -17,16 +18,19 @@ const Home = () => {
     useEffect(() => {
         const debounceTimer = setTimeout(() => {
             if (!search) return;
-            spotifyApi.searchTracks(search).then((res) => {
-                setSearchResults(
-                    res.body.tracks.items.map((track) => ({
-                        artist: track.artists[0].name,
-                        title: track.name,
-                        uri: track.uri,
-                        albumImage: track.album.images[0]?.url,
-                    }))
-                );
-            });
+            spotifyApi
+                .searchTracks(search)
+                .then((res) => {
+                    setSearchResults(
+                        res.body.tracks.items.map((track) => ({
+                            artist: track.artists[0].name,
+                            title: track.name,
+                            uri: track.uri,
+                            albumImage: track.album.images[0]?.url,
+                        }))
+                    );
+                })
+                .catch((err) => setResponseError(err));
         }, 500);
 
         return () => {
@@ -48,9 +52,11 @@ const Home = () => {
 
             <div className="flex-grow-1 my-2" style={{ overflowY: "auto" }}>
                 {searchResults.length > 0 &&
+                    !responseError &&
                     searchResults.map((track) => (
                         <Track track={track} key={track.uri} />
                     ))}
+                <p>{responseError && !!responseError}</p>
             </div>
             <div className="">
                 <Player />

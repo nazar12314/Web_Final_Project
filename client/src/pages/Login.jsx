@@ -5,6 +5,7 @@ import axios from "axios";
 
 const Login = () => {
     const [validated, setValidated] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
@@ -33,7 +34,7 @@ const Login = () => {
                 navigate("/");
             }
         } catch (error) {
-            console.error(error);
+            setErrorMessage(error.response.data.message);
         }
 
         setValidated(true);
@@ -80,6 +81,7 @@ const Login = () => {
                 </Form.Group>
                 <Button type="submit">Submit</Button>
                 <Link to={"/signup"}>Don't have an account? Register</Link>
+                <p style={{ color: "red" }}>{errorMessage}</p>
             </Form>
         </Container>
     );

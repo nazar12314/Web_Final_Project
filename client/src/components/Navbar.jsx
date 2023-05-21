@@ -1,6 +1,6 @@
 import React from "react";
 import { Navbar, Nav, Button } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const CustomNavbar = () => {
     const username = localStorage.getItem("user");
@@ -21,12 +21,16 @@ const CustomNavbar = () => {
             expand="lg"
             className="d-flex justify-space-around px-4"
         >
-            <Navbar.Brand href="/">Music App</Navbar.Brand>
+            <Navbar.Brand href="/">MusTracer</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse
                 id="basic-navbar-nav"
                 className="justify-content-end"
             >
+                <Nav className="mx-5">
+                    <Link to="/playlists">Playlists</Link>
+                    {/* <Link to="/recomendations">Recomendations</Link> */}
+                </Nav>
                 <Nav className="d-flex" style={{ gap: "20px" }}>
                     <Navbar.Text className="">
                         Logged in as: {username}
