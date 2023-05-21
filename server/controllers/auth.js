@@ -14,8 +14,8 @@ export const spotifyLogin = (req, res) => {
 
     const spotifyApi = new SpotifyWebApi({
         redirectUri: "http://localhost:3000",
-        clientId: "534fc98e66604af6b74ba67486f7590a",
-        clientSecret: "27b33c9bacc14b2486d03bd489ec3553",
+        clientId: "0dc9a9a29bb946609a69ff4d365123cd",
+        clientSecret: "04edffe09e294fe1a93703b5a2f1a139",
     });
 
     spotifyApi

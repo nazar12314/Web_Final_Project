@@ -2,10 +2,18 @@ import React, { useState, useEffect } from "react";
 import { Container, Form } from "react-bootstrap";
 import SpotifyWebApi from "spotify-web-api-node";
 import { Track, Player } from "../components";
+import SpotifyPlayer from 'react-spotify-player';
 
 const spotifyApi = new SpotifyWebApi({
-    clientId: "534fc98e66604af6b74ba67486f7590a",
+    clientId: "0dc9a9a29bb946609a69ff4d365123cd",
 });
+
+const size = {
+    width: '100%',
+    height: 300,
+  };
+const view = 'list'; // or 'coverart'
+const theme = 'black'; // or 'white'
 
 const Home = () => {
     const [search, setSearch] = useState("");
@@ -59,7 +67,12 @@ const Home = () => {
                 <p>{responseError && !!responseError}</p>
             </div>
             <div className="">
-                <Player />
+                <SpotifyPlayer
+                    uri="spotify:album:1TIUsv8qmYLpBEhvmBmyBk"
+                    size={size}
+                    view={view}
+                    theme={theme}
+                    />
             </div>
         </Container>
     );
