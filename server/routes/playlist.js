@@ -4,7 +4,8 @@ import {
     deleteSongFromPlaylist,
     getPlaylist,
     getPlaylists,
-} from "../controllers/playlist";
+} from "../controllers/playlist.js";
+import express from "express"
 
 const playlistRouter = express.Router();
 

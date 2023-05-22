@@ -1,7 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
-import authRouter from "./routes/auth";
-import playlistRouter from "./routes/playlist";
+import authRouter from "./routes/auth.js";
+import playlistRouter from "./routes/playlist.js";
 import cors from "cors";
 import dotenv from "dotenv";
 

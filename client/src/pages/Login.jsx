@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Form, Button, Container } from "react-bootstrap";
 import { useNavigate, Link } from "react-router-dom";
+import { AUTH_URL } from "../constants";
 import axios from "axios";
 
 const Login = () => {
@@ -31,7 +32,7 @@ const Login = () => {
                 const { token, user } = response.data;
                 localStorage.setItem("token", token);
                 localStorage.setItem("user", user.name);
-                navigate("/");
+                navigate("/spotify-auth");
             }
         } catch (error) {
             setErrorMessage(error.response.data.message);

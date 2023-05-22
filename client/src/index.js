@@ -7,6 +7,19 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+
+// const router = createBrowserRouter([
+//     {
+//         path: "/", element: <App />, children:[
+//             {
+//                 children: [
+//                     {}
+//                 ]
+//             }
+//         ]
+//     }
+// ])
+
 root.render(
     <React.StrictMode>
         <BrowserRouter>
