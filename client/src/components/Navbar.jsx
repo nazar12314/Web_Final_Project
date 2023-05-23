@@ -11,7 +11,7 @@ const CustomNavbar = () => {
         localStorage.removeItem("token");
         localStorage.removeItem("accessToken");
 
-        navigate("/");
+        return navigate("/signup");
     };
 
     return (

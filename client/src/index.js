@@ -1,29 +1,25 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App";
-import { BrowserRouter } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, BrowserRouter} from 'react-router-dom'
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Home, Login, Signup, SpotifyAuth, Playlists } from "./pages";
+import { ProtectedRoute } from "./components/ProtectedRoute";
+import { CustomNavbar } from "./components";
 
 import "./index.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-// const router = createBrowserRouter([
-//     {
-//         path: "/", element: <App />, children:[
-//             {
-//                 children: [
-//                     {}
-//                 ]
-//             }
-//         ]
-//     }
-// ])
+const router = createBrowserRouter([
+    {path: '/', element:  <ProtectedRoute><CustomNavbar /><Home /></ProtectedRoute>},
+    {path: '/spotify-auth', element: <SpotifyAuth />},
+    {path: "/signup", element: <Signup />},
+    {path: "/login", element: <Login />},
+    {path: "/playlists", element: <ProtectedRoute><CustomNavbar /><Playlists /></ProtectedRoute>}
+])
 
 root.render(
     <React.StrictMode>
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>
+        <RouterProvider router={router} />
     </React.StrictMode>
 );

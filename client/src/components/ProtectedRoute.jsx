@@ -6,6 +6,8 @@ export const ProtectedRoute = ({ children }) => {
 
     const accessToken = localStorage.getItem("accessToken");
 
+    console.log(isAuthorized);
+
     if (isAuthorized) {
         if (accessToken){
             return children;
