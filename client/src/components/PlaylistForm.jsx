@@ -24,6 +24,7 @@ const PlaylistForm = () => {
       );
 
       // navigate("/")
+      window.location.reload();
   } catch (error) {
       console.log(error);
       console.log("failed adding");

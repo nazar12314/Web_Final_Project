@@ -83,12 +83,13 @@ export const getPlaylists = async (req, res) => {
 
 export const deletePlaylist = async (req, res) => {
   try {
-    const { id } = req.params.id;
+    const { id } = req.params;
 
-    await Playlist.findByIdAndDelete(id);
-    res.status(200).json({
-      message: "Post has been deleted successfully!",
-    });
+    const deletedPlaylist = await Playlist.findByIdAndDelete(id);
+
+    if (!deletedPlaylist) {
+      return res.status(404).json({ message: "Playlist not found!" });
+    }
   } catch (error) {
     res.status(400).json({ message: error.message });
   }

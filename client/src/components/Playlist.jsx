@@ -2,18 +2,17 @@ import React from 'react';
 import { useState } from "react";
 import Track from "./Track";
 import axios from 'axios';
+import { Link, useNavigate } from "react-router-dom";
 
 function Playlist({playlist}) {
-
-    
+    const navigate = useNavigate()
     const handleDelete = async (e) =>
     {
     e.preventDefault();
     console.log("Playlist Name:", playlist._id);
     try {
-        await axios.post(
+        await axios.delete(
             `http://localhost:8080/api/playlists/delete-playlist/${playlist._id}`
-            // {id : playlist, author: localStorage.getItem("user")}
         );
     } catch (error) {
         console.log(error);

@@ -34,7 +34,8 @@ const Signup = () => {
                 const { token, user } = response.data;
                 localStorage.setItem("token", token);
                 localStorage.setItem("user", user._id);
-                navigate("/");
+                // navigate("/");
+                window.location.reload();
             }
         } catch (error) {
             setErrorMessage(error.response.data.message);
