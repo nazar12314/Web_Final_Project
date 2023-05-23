@@ -2,17 +2,17 @@ import React, { useState, useEffect } from "react";
 import { Container, Form } from "react-bootstrap";
 import SpotifyWebApi from "spotify-web-api-node";
 import { Track, Player } from "../components";
-import { SPOTIFY_CLIENT_ID } from "../constants";
+import  {SPOTIFY_CLIENT_ID} from "../constants"
 const spotifyApi = new SpotifyWebApi({
     clientId: SPOTIFY_CLIENT_ID,
 });
 
 const size = {
-    width: "100%",
+    width: '100%',
     height: 300,
-};
-const view = "list"; // or 'coverart'
-const theme = "black"; // or 'white'
+  };
+const view = 'list'; // or 'coverart'
+const theme = 'black'; // or 'white'
 
 const Home = () => {
     const [search, setSearch] = useState("");
@@ -22,8 +22,9 @@ const Home = () => {
 
     function chooseTrack(track) {
         setPlayingTrack(track);
-        setSearch("");
+        setSearch('');
     }
+
 
     const accessToken = localStorage.getItem("accessToken");
     spotifyApi.setAccessToken(accessToken);
@@ -52,7 +53,8 @@ const Home = () => {
     }, [search, accessToken]);
 
     return (
-        <Container className="d-flex flex-column p-5 gap-3">
+        <>
+        <Container className="d-flex flex-column p-5 gap-3" style={{height:"100vh"}}>
             <h2>
                 <b>Find a track:</b>
             </h2>
@@ -67,23 +69,19 @@ const Home = () => {
                 {searchResults.length > 0 &&
                     !responseError &&
                     searchResults.map((track) => (
-                        <Track
-                            track={track}
-                            key={track.uri}
-                            chooseTrack={chooseTrack}
-                        />
+                        <Track track={track} key={track.uri} chooseTrack={chooseTrack} />
                     ))}
                 <p>{responseError && !!responseError}</p>
             </div>
-
-            <div>
-                <Player
-                    accessToken={accessToken}
-                    //  trackUri={searchResults[0]?.uri} />
-                    trackUri={playingTrack?.uri}
-                />
-            </div>
         </Container>
+        <div className="bottom-player" style={{position: "sticky", bottom: 0, width: "100%", margin: 0}}>
+                    <Player
+                        accessToken={accessToken}
+                        //  trackUri={searchResults[0]?.uri} />
+                        trackUri={playingTrack?.uri}
+                    />
+        </div>
+        </>
     );
 };
 
