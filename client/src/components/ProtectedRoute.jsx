@@ -6,13 +6,11 @@ export const ProtectedRoute = ({ children }) => {
 
     const accessToken = localStorage.getItem("accessToken");
 
-    console.log(isAuthorized);
-
     if (isAuthorized) {
-        if (accessToken){
+        if (accessToken) {
             return children;
         }
         return <Navigate to="/spotify-auth" />; // navigate to SpotifyAuth
     }
     return <Navigate to="/signup" />; // navigate to signup
-  };
+};

@@ -7,21 +7,18 @@ import { useAuth } from "../hooks";
 const code = new URLSearchParams(window.location.search).get("code");
 
 const SpotifyAuth = () => {
-    console.log("SpotifyAuth container created");
     const token = localStorage.getItem("token");
     const isAuthorized = !!token;
 
     const accessToken = useAuth(code);
-    console.log(accessToken);
 
     if (accessToken && !localStorage.getItem("accessToken"))
         localStorage.setItem("accessToken", accessToken);
 
-
-    if (!isAuthorized){
+    if (!isAuthorized) {
         return <Navigate to="/signup" />;
     }
-    if (!localStorage.getItem("accessToken")){
+    if (!localStorage.getItem("accessToken")) {
         return (
             <Container
                 style={{ height: "100vh" }}

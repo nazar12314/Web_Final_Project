@@ -1,16 +1,31 @@
 import React from "react";
 import { Col } from "react-bootstrap";
+import axios from "axios";
 
-function Playlist({ playlist, onDelete }) {
+function ModalPlaylist({ playlist, track, setShowDialog }) {
+    const addSong = async () => {
+        try {
+            await axios.post(
+                `http://localhost:8080/api/playlists/add-song/${playlist._id}`,
+                { author: localStorage.getItem("user"), song: track }
+            );
+        } catch (error) {
+            console.log(error);
+        }
+
+        setShowDialog(false);
+    };
+
     return (
         <Col
-            md={5}
+            md={12}
             className="d-flex align-items-center"
             style={{
                 height: "100px",
                 justifyContent: "space-between",
                 cursor: "pointer",
             }}
+            onClick={addSong}
         >
             {playlist.songs.length <= 0 && (
                 <div
@@ -25,13 +40,8 @@ function Playlist({ playlist, onDelete }) {
             <div className="ml-3">
                 <div>{playlist.name}</div>
             </div>
-            <i
-                onClick={onDelete}
-                className="bi bi-trash"
-                style={{ cursor: "pointer", color: "red" }}
-            ></i>
         </Col>
     );
 }
 
-export default Playlist;
+export default ModalPlaylist;

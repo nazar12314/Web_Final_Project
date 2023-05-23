@@ -1,68 +1,39 @@
-import {React, useState, useEffect} from 'react';
-import PlaylistForm from '../components/PlaylistForm.jsx';
-import Playlist from '../components/Playlist.jsx';
-import axios from 'axios';
+import { React, useEffect } from "react";
+import axios from "axios";
+import { useFetchPlaylists } from "../hooks";
+import { PlaylistBar, PlaylistForm } from "../components";
+import { Container } from "react-bootstrap";
 
 const Playlists = () => {
-
-    const [playlists, setPlaylists] = useState([]);
+    const { playlists, fetchData } = useFetchPlaylists();
 
     useEffect(() => {
-        const fetchAccessToken = async () => {
-            try {
-                const response = await axios.get(
-                    `http://localhost:8080/api/playlists/get-playlists/${localStorage.getItem(
-                        "user"
-                    )}`
-                );
+        fetchData();
+    }, [playlists]);
 
-                setPlaylists(response.data);
-            } catch (error) {
-                console.log(error);
-            }
-        };
+    const handleDeletePlaylist = async (id) => {
+        try {
+            await axios.delete(
+                `http://localhost:8080/api/playlists/delete-playlist/${id}`
+            );
+            fetchData();
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
-        fetchAccessToken();
-    }, []);
-
-    function handleDelete(e){
-        console.log("delete");
-        console.log(e);
-    }
-
-  return (
-    <>
-    <div>
-      <h1>Create New Playlist</h1>
-      <PlaylistForm />
-    </div>
-    {
-    playlists.length > 0 ? 
-        playlists.map((playlist) => (
+    return (
+        <Container>
             <div>
-
-            <Playlist playlist={playlist} key={playlist.name}
-            onClick = {handleDelete}
-            />
-            {/* <h4
-                onClick={handleDelete}
-                style={{
-                    position: "relative",
-                    marginLeft: "auto",
-                    color: "#1DB954",
-                    display: "flex", 
-                    justifyContent: "center",
-                    alignItems: "center",
-                    cursor: "pointer"
-                }}
-            >
-                Delete </h4> */}
+                <h1>Create New Playlist</h1>
+                <PlaylistForm />
             </div>
-            ))
-         : <h2>No available playlists</h2>
-    }
-      </>
-  );
+            <PlaylistBar
+                playlists={playlists}
+                handleDeletePlaylist={handleDeletePlaylist}
+            />
+        </Container>
+    );
 };
 
 export default Playlists;

@@ -1,45 +1,52 @@
-import {React, useState} from 'react';
-import {useNavigate} from "react-router-dom"
-import axios from "axios"
+import { React, useState } from "react";
+import { Form, Button, Col, Row } from "react-bootstrap";
+import axios from "axios";
 
 const PlaylistForm = () => {
-  const [playlistName, setPlaylistName] = useState("");
-  const navigate = useNavigate()
+    const [playlistName, setPlaylistName] = useState("");
 
-  const handleInputChange = (e) => {
-    setPlaylistName(e.target.value);
-  };
+    const handleInputChange = (e) => {
+        setPlaylistName(e.target.value);
+    };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    // Handle the form submission here (e.g., send data to the server)
-    console.log("Playlist Name:", playlistName);
-    // Reset the form after submission
-    setPlaylistName("");
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setPlaylistName("");
 
-    try {
-      await axios.post(
-          "http://localhost:8080/api/playlists/create-playlist",
-          {name : playlistName, author: localStorage.getItem("user")}
-      );
+        try {
+            await axios.post(
+                "http://localhost:8080/api/playlists/create-playlist",
+                { name: playlistName, author: localStorage.getItem("user") }
+            );
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
-      // navigate("/")
-      window.location.reload();
-  } catch (error) {
-      console.log(error);
-      console.log("failed adding");
-  }
-  };
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Playlist Name:
-        <input type="text" value={playlistName} onChange={handleInputChange} />
-      </label>
-      <button type="submit">Create Playlist</button>
-    </form>
-  );
+    return (
+        <Form>
+            <Row>
+                <Form.Group controlId="playlistName" as={Col} md={8}>
+                    <Form.Label></Form.Label>
+                    <Form.Control
+                        type="text"
+                        value={playlistName}
+                        onChange={handleInputChange}
+                        placeholder="Playlist Name:"
+                    />
+                </Form.Group>
+                <Button
+                    variant="dark"
+                    type="submit"
+                    as={Col}
+                    md={4}
+                    onClick={handleSubmit}
+                >
+                    Create Playlist
+                </Button>
+            </Row>
+        </Form>
+    );
 };
 
 export default PlaylistForm;
