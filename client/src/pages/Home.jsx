@@ -3,9 +3,9 @@ import { Container, Form } from "react-bootstrap";
 import SpotifyWebApi from "spotify-web-api-node";
 import { Track, Player } from "../components";
 import SpotifyPlayer from 'react-spotify-player';
-
+import  {SPOTIFY_CLIENT_ID} from "../constants"
 const spotifyApi = new SpotifyWebApi({
-    clientId: "0dc9a9a29bb946609a69ff4d365123cd",
+    clientId: SPOTIFY_CLIENT_ID,
 });
 
 const size = {
@@ -19,6 +19,13 @@ const Home = () => {
     const [search, setSearch] = useState("");
     const [searchResults, setSearchResults] = useState({});
     const [responseError, setResponseError] = useState("");
+    const [playingTrack, setPlayingTrack] = useState([]);
+
+    function chooseTrack(track) {
+        setPlayingTrack(track);
+        setSearch('');
+    }
+
 
     const accessToken = localStorage.getItem("accessToken");
     spotifyApi.setAccessToken(accessToken);
@@ -66,13 +73,10 @@ const Home = () => {
                     ))}
                 <p>{responseError && !!responseError}</p>
             </div>
-            <div className="">
-                <SpotifyPlayer
-                    uri="spotify:album:1TIUsv8qmYLpBEhvmBmyBk"
-                    size={size}
-                    view={view}
-                    theme={theme}
-                    />
+            
+            <div><Player accessToken={accessToken}
+             trackUri={searchResults[0]?.uri} />
+            {/* // trackUri={playingTrack?.uri} /> */}
             </div>
         </Container>
     );
