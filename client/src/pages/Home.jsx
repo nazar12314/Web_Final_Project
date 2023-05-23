@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Container, Form } from "react-bootstrap";
 import SpotifyWebApi from "spotify-web-api-node";
 import { Track, Player } from "../components";
-import SpotifyPlayer from 'react-spotify-player';
 import  {SPOTIFY_CLIENT_ID} from "../constants"
 const spotifyApi = new SpotifyWebApi({
     clientId: SPOTIFY_CLIENT_ID,
@@ -69,14 +68,14 @@ const Home = () => {
                 {searchResults.length > 0 &&
                     !responseError &&
                     searchResults.map((track) => (
-                        <Track track={track} key={track.uri} />
+                        <Track track={track} key={track.uri} chooseTrack={chooseTrack} />
                     ))}
                 <p>{responseError && !!responseError}</p>
             </div>
             
             <div><Player accessToken={accessToken}
-             trackUri={searchResults[0]?.uri} />
-            {/* // trackUri={playingTrack?.uri} /> */}
+            //  trackUri={searchResults[0]?.uri} />
+            trackUri={playingTrack?.uri} />
             </div>
         </Container>
     );
