@@ -1,10 +1,10 @@
 import Playlist from "../models/Playlist.js";
 
 export const createPlaylist = async (req, res) => {
-    const name = req.body.name;
+    const { name, author } = req.body;
 
     try {
-        const newPlaylist = new Playlist({ name });
+        const newPlaylist = new Playlist({ name, author });
         await newPlaylist.save();
         res.status(201).json(newPlaylist);
     } catch (error) {
@@ -14,10 +14,15 @@ export const createPlaylist = async (req, res) => {
 
 export const addSongToPlaylist = async (req, res) => {
     try {
-        const song = req.body.song;
+        const { author, song } = req.body.song;
         const id = req.params.id;
 
         const playlist = await Playlist.findById(id);
+
+        if (playlist.author != author)
+            res.status(300).json({
+                message: "This user has no access to specified playlist",
+            });
 
         const playlistSongs = playlist.songs.push(song);
 
@@ -33,10 +38,15 @@ export const addSongToPlaylist = async (req, res) => {
 
 export const deleteSongFromPlaylist = async () => {
     try {
-        const song = req.body.song;
+        const { song, author } = req.body;
         const id = req.params.id;
 
         const playlist = await Playlist.findById(id);
+
+        if (playlist.author != author)
+            res.status(300).json({
+                message: "This user has no access to specified playlist",
+            });
 
         const playlistSongs = playlist.songs.filter((item) => item != song);
 
@@ -62,7 +72,9 @@ export const getPlaylist = (req, res) => {
 
 export const getPlaylists = async (req, res) => {
     try {
-        const playlists = await Playlist.find(id);
+        const author = req.params.id;
+
+        const playlists = await Playlist.find({ author: author });
         res.status(200).json(playlists);
     } catch (error) {
         res.status(404).json({ message: error.message });

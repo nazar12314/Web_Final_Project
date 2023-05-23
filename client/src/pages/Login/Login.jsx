@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Form, Button, Container } from "react-bootstrap";
 import { useNavigate, Link } from "react-router-dom";
-import { AUTH_URL } from "../constants";
+import { AUTH_URL } from "../../constants";
 import axios from "axios";
 
 const Login = () => {
