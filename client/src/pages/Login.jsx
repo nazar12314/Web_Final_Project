@@ -30,7 +30,7 @@ const Login = () => {
                 );
                 const { token, user } = response.data;
                 localStorage.setItem("token", token);
-                localStorage.setItem("user", user.name);
+                localStorage.setItem("user", user._id);
                 navigate("/spotify-auth");
             }
         } catch (error) {
