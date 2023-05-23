@@ -1,4 +1,3 @@
-import React from "react";
 import { Col } from "react-bootstrap";
 
 function Playlist({ playlist, onDelete }) {
@@ -12,7 +11,7 @@ function Playlist({ playlist, onDelete }) {
                 cursor: "pointer",
             }}
         >
-            {playlist.songs.length <= 0 && (
+            {playlist.songs.length < 1 ? (
                 <div
                     style={{
                         height: "100%",
@@ -20,6 +19,11 @@ function Playlist({ playlist, onDelete }) {
                         backgroundColor: "black",
                     }}
                 ></div>
+            ) : (
+                <img
+                    src={playlist.songPictures[0]}
+                    style={{ height: "100%", width: "100px" }}
+                ></img>
             )}
 
             <div className="ml-3">

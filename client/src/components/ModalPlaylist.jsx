@@ -7,7 +7,11 @@ function ModalPlaylist({ playlist, track, setShowDialog }) {
         try {
             await axios.post(
                 `http://localhost:8080/api/playlists/add-song/${playlist._id}`,
-                { author: localStorage.getItem("user"), song: track }
+                {
+                    author: localStorage.getItem("user"),
+                    song: track.uri,
+                    songPicture: track.albumImage,
+                }
             );
         } catch (error) {
             console.log(error);
@@ -27,7 +31,7 @@ function ModalPlaylist({ playlist, track, setShowDialog }) {
             }}
             onClick={addSong}
         >
-            {playlist.songs.length <= 0 && (
+            {playlist.songs.length < 1 ? (
                 <div
                     style={{
                         height: "100%",
@@ -35,6 +39,11 @@ function ModalPlaylist({ playlist, track, setShowDialog }) {
                         backgroundColor: "black",
                     }}
                 ></div>
+            ) : (
+                <img
+                    src={playlist.songPictures[0]}
+                    style={{ height: "100%", width: "100px" }}
+                ></img>
             )}
 
             <div className="ml-3">

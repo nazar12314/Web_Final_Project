@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Modal, Row } from "react-bootstrap";
 import ModalPlaylist from "./ModalPlaylist";
-import axios from "axios";
 
 export default function TrackSearchResult({ track, chooseTrack, playlists }) {
     const [showDialog, setShowDialog] = useState(false);
@@ -64,7 +63,7 @@ export default function TrackSearchResult({ track, chooseTrack, playlists }) {
                                 <ModalPlaylist
                                     playlist={playlist}
                                     key={playlist._id}
-                                    track={track.uri}
+                                    track={track}
                                     setShowDialog={setShowDialog}
                                 />
                             ))}
