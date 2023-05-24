@@ -52,7 +52,6 @@ const Home = () => {
     useEffect(() => {
         const debounceTimer = setTimeout(() => {
             if (!search) {
-                fetchPopularTracks();
                 return;
             }
             spotifyApi

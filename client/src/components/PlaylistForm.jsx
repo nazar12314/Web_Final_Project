@@ -34,6 +34,7 @@ const PlaylistForm = () => {
             }}
         >
             <Col
+            className="createPlaylistForm"
                 style={{
                     display: "flex",
                     justifyContent: "center",

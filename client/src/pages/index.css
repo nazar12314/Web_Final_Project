@@ -104,6 +104,7 @@ input[type="search"]:focus {
     color: #fff;
 }
 
+.createPlaylistForm input[type="text"],
 .signUpContainer input[type="text"],
 .signUpContainer input[type="password"],
 .signUpContainer button {

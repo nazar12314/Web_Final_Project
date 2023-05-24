@@ -3,17 +3,15 @@ import { Navbar, Nav, Button } from "react-bootstrap";
 import { useNavigate, Link } from "react-router-dom";
 import "./components.css";
 
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faList } from '@fortawesome/free-solid-svg-icons';
-
 const CustomNavbar = () => {
-    const username = localStorage.getItem("user");
+    const username = localStorage.getItem("userName");
     const navigate = useNavigate();
 
     const handleLogout = () => {
         localStorage.removeItem("user");
         localStorage.removeItem("token");
         localStorage.removeItem("accessToken");
+        localStorage.removeItem("userName");
 
         return navigate("/signup");
     };

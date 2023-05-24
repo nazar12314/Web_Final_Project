@@ -6,6 +6,8 @@ const Player = ({ accessToken, trackUri }) => {
 
   useEffect(() => setPlay(true), [trackUri])
 
+  const isList = Array.isArray(trackUri)
+
   if (!accessToken) return null
   return (
     <SpotifyPlayer
@@ -15,7 +17,7 @@ const Player = ({ accessToken, trackUri }) => {
         if (!state.isPlaying) setPlay(false)
       }}
       play={play}
-      uris={trackUri ? [trackUri] : []}
+      uris={trackUri ? (isList ? trackUri : [trackUri]) : []}
       hideAttribution={true}
       styles={{ activeColor: '#fff',
       bgColor: '#333',

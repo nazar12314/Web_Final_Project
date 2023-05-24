@@ -20,6 +20,7 @@ export default function TrackSearchResult({
     };
 
     return (
+        <div style={{display: "flex", alignItems: "center"}}>
         <div
             className="d-flex m-2 align-items-center track"
             style={{
@@ -27,6 +28,7 @@ export default function TrackSearchResult({
                 gap: "20px",
                 justifyContent: "space-between",
                 margin: "10px",
+                width: "95%"
             }}
             onClick={handlePlay}
         >
@@ -46,6 +48,9 @@ export default function TrackSearchResult({
                     <div className="text-muted">{track.title}</div>
                 </div>
             </div>
+            <div>
+            </div>
+            </div>
             {addPlaylist && (
                 <div className="addButton">
                     <span
@@ -56,7 +61,7 @@ export default function TrackSearchResult({
                 </div>
             )}
             <Modal show={showDialog} onHide={handleDialogToggle}>
-                <Modal.Header closeButton>
+                <Modal.Header closeButton style={{ color: "white" }}>
                     <Modal.Title>Choose playlist to add:</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>

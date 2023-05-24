@@ -45,10 +45,6 @@
   height: 40px;
 }
 
-
-.track{
-  margin-right: 500px;
-}
 .track:hover{
   background-color: #282828;
   opacity: 0.8;

@@ -4,6 +4,7 @@ import axios from "axios";
 import { Container } from "react-bootstrap";
 import { Track, Player } from "../components";
 
+
 const PlaylistDetail = () => {
     const { id } = useParams();
     const [playlistData, setPlaylistData] = useState([]);
@@ -94,7 +95,7 @@ const PlaylistDetail = () => {
     >
         <Player
             accessToken={accessToken}
-            trackUri={playingTrack?.uri}
+            trackUri={playlistData.map(track => track.uri)}
         />
     </div>
     </>

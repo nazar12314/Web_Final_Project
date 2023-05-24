@@ -5,16 +5,16 @@ function Playlist({ playlist, onDelete }) {
     return (
         <Col
             md={5}
-            className="d-flex align-items-center"
+            className="d-flex align-items-center track"
             style={{
                 display: "flex",
                 justifyContent: "space-between",
                 alignContent: "center",
-                // backgroundColor: "#3b3b3b",
                 flexDirection: "column",
                 borderRadius: "7px",
                 color: "wheat",
                 textDecoration: "none",
+                padding: "15px"
             }}
         >
             <Link to={`/playlist/${playlist._id}`}>
@@ -36,7 +36,7 @@ function Playlist({ playlist, onDelete }) {
                 )}
             </Link>
 
-            <div style={{ display: "flex", gap: "10px" }}>
+            <div style={{ display: "flex", gap: "10px", padding: "15px 0px" }}>
                 <div className="ml-3">
                     <div>{playlist.name}</div>
                 </div>
