@@ -2,13 +2,19 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { Container } from "react-bootstrap";
-import { Track } from "../components";
+import { Track, Player } from "../components";
 
 const PlaylistDetail = () => {
     const { id } = useParams();
     const [playlistData, setPlaylistData] = useState([]);
     const [playlistName, setPlaylistName] = useState([]);
+    const accessToken = localStorage.getItem("accessToken");
+    const [playingTrack, setPlayingTrack] = useState([]);
 
+
+    function chooseTrack(track) {
+        setPlayingTrack(track);
+    }
     const zipArraysIntoObjects = (keys, arrays) => {
         const length = Math.min(...arrays.map((array) => array.length));
         const zipped = [];
@@ -53,6 +59,7 @@ const PlaylistDetail = () => {
     }, []);
 
     return (
+        <>
         <Container
             className="d-flex flex-column gap-3 general"
             style={{
@@ -70,12 +77,27 @@ const PlaylistDetail = () => {
                     <Track
                         track={track}
                         key={track.uri}
-                        // chooseTrack={chooseTrack}
+                        chooseTrack={chooseTrack}
                         playlists={[]}
                         addPlaylist={false}
                     />
                 ))}
         </Container>
+        <div
+        className="bottom-player"
+        style={{
+            position: "sticky",
+            bottom: 0,
+            width: "100%",
+            margin: 0,
+        }}
+    >
+        <Player
+            accessToken={accessToken}
+            trackUri={playingTrack?.uri}
+        />
+    </div>
+    </>
     );
 };
 
