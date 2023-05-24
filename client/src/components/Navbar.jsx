@@ -1,6 +1,10 @@
 import React from "react";
 import { Navbar, Nav, Button } from "react-bootstrap";
 import { useNavigate, Link } from "react-router-dom";
+import "./components.css";
+
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faList } from '@fortawesome/free-solid-svg-icons';
 
 const CustomNavbar = () => {
     const username = localStorage.getItem("user");
@@ -19,24 +23,28 @@ const CustomNavbar = () => {
             bg="dark"
             variant="dark"
             expand="lg"
-            className="d-flex justify-space-around px-4"
+            className="d-flex justify-space-around px-4 navBar"
         >
             <Navbar.Brand href="/">MusTracer</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse
                 id="basic-navbar-nav"
                 className="justify-content-end"
+                style={{minWidth: "10px"}}
             >
                 <Nav className="mx-5">
-                    <Link to="/playlists">Playlists</Link>
+                    {/* <FontAwesomeIcon icon={faList} className="mr-2" /> */}
+                    <Link to="/playlists" className="navLink">Playlists</Link>
+
                     {/* <Link to="/recomendations">Recomendations</Link> */}
                 </Nav>
                 <Nav className="d-flex" style={{ gap: "20px" }}>
                     <Navbar.Text className="">
                         Logged in as: {username}
                     </Navbar.Text>
-                    <Button variant="outline-light" onClick={handleLogout}>
-                        Logout
+                    <Button variant="outline-light" onClick={handleLogout} style={{maxWidth:
+                    "100px", alignSelf:"center"}}>
+                        Log out
                     </Button>
                 </Nav>
             </Navbar.Collapse>

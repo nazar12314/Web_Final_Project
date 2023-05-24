@@ -25,7 +25,7 @@ function ModalPlaylist({ playlist, track, setShowDialog }) {
     return (
         <Col
             md={12}
-            className="d-flex align-items-center"
+            className="d-flex align-items-center choosePlaylist"
             style={{
                 height: "100px",
                 justifyContent: "space-between",
@@ -36,18 +36,18 @@ function ModalPlaylist({ playlist, track, setShowDialog }) {
             {playlist.songs.length < 1 ? (
                 <div
                     style={{
-                        height: "100%",
-                        width: "100px",
-                        backgroundColor: "black",
+                        height: "90%",
+                        width: "90px",
+                        backgroundColor: "#3f3f3f",
                     }}
                 ></div>
             ) : (
                 <img
                     src={playlist.songPictures[0]}
-                    style={{ height: "100%", width: "100px" }}
+                    style={{ height: "90%", width: "90px" }}
                 ></img>
             )}
-
+    
             <div className="ml-3">
                 <div>{playlist.name}</div>
             </div>

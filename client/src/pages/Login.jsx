@@ -42,8 +42,12 @@ const Login = () => {
 
     return (
         <Container
-            className="d-flex justify-content-center align-items-center flex-column"
-            style={{ height: "100vh" }}
+            className="d-flex justify-content-center align-items-center flex-column loginContainer"
+            style={{ height: "100vh",
+            background: "linear-gradient(175deg, rgb(30,30,30), rgb(0,0,0))", 
+            margin: "0px",
+            maxWidth: "100%",
+        }}
         >
             <h1>Sign in</h1>
             <Form
@@ -51,7 +55,7 @@ const Login = () => {
                 noValidate
                 validated={validated}
                 onSubmit={handleSubmit}
-                style={{ gap: "20px", width: "50%" }}
+                style={{ gap: "20px", width: "50%", maxWidth: "500px" }}
             >
                 <Form.Group controlId="validationCustomE">
                     <Form.Label>Email</Form.Label>

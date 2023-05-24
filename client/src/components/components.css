@@ -1,0 +1,164 @@
+.navLink {
+    font-size: 16px;
+    text-decoration: none;
+    padding: 8px;
+    transition: color 0.3s ease;
+  }
+  
+
+.navBar{
+  background: linear-gradient(180deg, rgba(26,26,26,1) 0%, rgba(27,27,27,1) 98%, rgb(89, 255, 0) 100%);
+}
+
+.navbar-brand{
+  font-size: 28px;
+}
+  
+.navbar-brand:hover{
+  color: #08fb00a4;
+  transition: color 0.3s ease;
+}
+
+.navLink{
+    color: #FFFFFF; /* Link color */
+      align-self: center;
+  width: 80px;
+  font-size: 18px;
+  height: 40px;
+  padding: 8px 8px; /* Padding around the link */
+  text-decoration: none; /* Remove underline */
+}
+
+.navLink:hover{
+  align-self: center;
+  transition: background-color 0.3s ease;
+  color: #08fb00a4;
+  transition: color 0.3s ease;
+  margin: 0;
+  transition: background-color 0.6s ease;
+}
+
+.plusToggle{
+  padding: 5px;
+  margin-right: 0%;
+  width: 40px;
+  height: 40px;
+}
+
+
+.track{
+  margin-right: 500px;
+}
+.track:hover{
+  background-color: #282828;
+  opacity: 0.8;
+  border-radius: 10px;
+  transition: box-shadow 0.3s ease;
+}
+
+.addButton{
+  padding-right: 20px;
+  padding-top: 3px;
+}
+
+
+.plusToggle:hover{
+  background-color: green;
+  border-radius: 15px;
+  transition: background-color 0.6s ease;
+}
+
+
+
+/* 
+
+sdgfnbxdvzscfgvncbvx
+
+*/
+
+.col{
+  background: black;
+
+}
+
+.modal-content{
+  border-radius: 100px;
+}
+.modal-header{
+  background: #1b1b1b;
+  color: white;
+  border-radius: 15px 15px 0px 0px;
+}
+
+.modal-body{
+  background: black;
+  padding-top: 0px;
+  width: 100.1%;
+  border-radius: 0px 0px 15px 15px;
+}
+.choosePlaylist{
+  color:white;
+}
+
+.choosePlaylist:hover{
+  background: #1a1a1a;
+  border-radius: 10px;
+  transition: background-color 0.3s ease;
+  border: 0.5px solid darkgreen;
+}
+
+btn-close{
+  color: darkgreen;
+  padding: 0px;
+}
+
+.nav-bar{
+  display: flex;
+  justify-content: space-around;
+}
+.logout {
+  color: #ffffff; /* Text color */
+  border-radius: 4px; /* Rounded corners */
+  width: 70px;
+  margin: 5px;
+}
+
+.logout:hover {
+  /* Styles for when the link is hovered */
+  background-color: dimgrey; /* Hovered background color */
+}
+
+.spotify-content{
+  display: flex;
+  justify-content: left;
+}
+
+.spotify-input {
+  background-color: #282828;
+  border: none;
+  border-radius: 7px;
+  color: #fff;
+  max-width: 250px;
+}
+
+.spotify-button {
+  background-color: #1db954;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.spotify-button:hover {
+  background-color: #269348;
+  transition: background-color 0.3s ease;
+}
+
+.playlistContainer{
+  background-color: #1a1a1a;
+}
+
+.spotify-content{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}

@@ -46,8 +46,12 @@ const Signup = () => {
 
     return (
         <Container
-            className="d-flex justify-content-center align-items-center flex-column"
-            style={{ height: "100vh" }}
+            className="d-flex justify-content-center align-items-center flex-column signUpContainer"
+            style={{ height: "100vh",
+            background: "linear-gradient(175deg, rgb(30,30,30), rgb(0,0,0))", 
+            margin: "0px",
+            maxWidth: "100%",
+        }}
         >
             <h1>Sign up</h1>
             <Form

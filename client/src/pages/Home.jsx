@@ -4,6 +4,7 @@ import SpotifyWebApi from "spotify-web-api-node";
 import { Track, Player } from "../components";
 import { SPOTIFY_CLIENT_ID } from "../constants";
 import axios from "axios";
+import './index.css'
 
 const spotifyApi = new SpotifyWebApi({
     clientId: SPOTIFY_CLIENT_ID,
@@ -21,6 +22,27 @@ const Home = () => {
         setPlayingTrack(track);
         setSearch("");
     }
+
+    const fetchPopularTracks = () => {
+        spotifyApi
+          .getPlaylistTracks('37i9dQZEVXbMDoHDwVN2tF') // playlist ID 
+          .then((res) => {
+            setSearchResults(
+              res.body.items.map((item) => {
+                const track = item.track;
+                return {
+                  artist: track.artists[0].name,
+                  title: track.name,
+                  uri: track.uri,
+                  albumImage: track.album.images[0]?.url,
+                };
+              })
+            );
+          })
+          .catch((err) => setResponseError(err));
+      };
+
+    useEffect(() => {fetchPopularTracks();}, []);
 
     const accessToken = localStorage.getItem("accessToken");
     spotifyApi.setAccessToken(accessToken);
@@ -67,20 +89,33 @@ const Home = () => {
     return (
         <>
             <Container
-                className="d-flex flex-column p-5 gap-3"
-                style={{ height: "100vh" }}
+                className="d-flex flex-column gap-3 general"
+                style={{ height: "100vh", background: "#1a1a1a", maxWidth:"100%", color: "white", padding: "50px", paddingBottom:"80px" }}
             >
-                <h2>
-                    <b>Find a track:</b>
-                </h2>
-                <Form.Control
-                    type="search"
-                    placeholder="Search for a song"
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-                />
-
-                <div className="flex-grow-1 my-2" style={{ overflowY: "auto" }}>
+            <Form.Control
+                type="search"
+                placeholder="Search for a song"
+                className="searchField"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                style={{ background: "#242424", 
+                color: "white", 
+                maxWidth:"350px",
+                fontSize: "16px", }}
+                
+            />
+                <h4 style={{margin:"0px"}}>
+                {search.length > 0 && !responseError ? (
+                    searchResults.length > 0 ? (
+                    <p style={{margin:"0px"}}>Search results:</p>
+                    ) : (
+                    <p style={{margin:"0px"}}>No results found</p>
+                    )
+                ) : (
+                    <p style={{margin:"0px"}}>Recommended tracks:</p>
+                )}
+                </h4>
+                <div className="flex-grow-1 my-2" style={{ overflowY:"scroll"}}>
                     {searchResults.length > 0 &&
                         !responseError &&
                         searchResults.map((track) => (
@@ -97,8 +132,8 @@ const Home = () => {
             <div
                 className="bottom-player"
                 style={{
-                    position: "sticky",
-                    bottom: 0,
+                    position: "fixed",
+                    bottom: "0",
                     width: "100%",
                     margin: 0,
                 }}

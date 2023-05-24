@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Modal, Row } from "react-bootstrap";
 import ModalPlaylist from "./ModalPlaylist";
+import "./components.css"
 
 export default function TrackSearchResult({ track, chooseTrack, playlists }) {
     const [showDialog, setShowDialog] = useState(false);
@@ -15,23 +16,25 @@ export default function TrackSearchResult({ track, chooseTrack, playlists }) {
 
     return (
         <div
-            className="d-flex m-2 align-items-center"
+            className="d-flex m-2 align-items-center track"
             style={{
                 cursor: "pointer",
                 gap: "20px",
                 justifyContent: "space-between",
+                margin: "10px",
             }}
             onClick={handlePlay}
         >
             <div
                 style={{
                     gap: "20px",
+                    margin: "10px",
                     display: "flex",
                 }}
             >
                 <img
                     src={track.albumImage}
-                    style={{ height: "64px", width: "64px" }}
+                    style={{ height: "64px", width: "64px"}}
                 />
                 <div className="ml-3">
                     <div>{track.artist}</div>
@@ -39,11 +42,13 @@ export default function TrackSearchResult({ track, chooseTrack, playlists }) {
                 </div>
             </div>
 
-            <i
-                onClick={handleDialogToggle}
-                className="bi bi-plus"
-                style={{ fontSize: "24px" }}
-            ></i>
+            <div className="addButton"> 
+                <span
+                    onClick={handleDialogToggle}
+                    className="bi bi-plus plusToggle"
+                    style={{ fontSize: "24px", }}
+                ></span>
+            </div>
 
             <Modal show={showDialog} onHide={handleDialogToggle}>
                 <Modal.Header closeButton>
