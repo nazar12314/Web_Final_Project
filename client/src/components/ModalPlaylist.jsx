@@ -11,6 +11,8 @@ function ModalPlaylist({ playlist, track, setShowDialog }) {
                     author: localStorage.getItem("user"),
                     song: track.uri,
                     songPicture: track.albumImage,
+                    title: track.title,
+                    songAuthor: track.artist,
                 }
             );
         } catch (error) {

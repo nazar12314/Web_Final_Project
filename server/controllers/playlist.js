@@ -14,7 +14,7 @@ export const createPlaylist = async (req, res) => {
 
 export const addSongToPlaylist = async (req, res) => {
     try {
-        const { author, song, songPicture } = req.body;
+        const { author, song, songPicture, songAuthor, title } = req.body;
         const id = req.params.id;
 
         const playlist = await Playlist.findById(id);
@@ -25,11 +25,15 @@ export const addSongToPlaylist = async (req, res) => {
             });
 
         const playlistSongs = [...playlist.songs, song];
+        const playlistSongAuthors = [...playlist.songAuthors, songAuthor];
+        const playlistSongTitles = [...playlist.songTitles, title];
         const playlistSongPictures = [...playlist.songPictures, songPicture];
 
         const updatedPost = await Playlist.findByIdAndUpdate(id, {
             songs: playlistSongs,
             songPictures: playlistSongPictures,
+            songAuthors: playlistSongAuthors,
+            songTitles: playlistSongTitles,
         });
 
         res.status(200).json(updatedPost);
