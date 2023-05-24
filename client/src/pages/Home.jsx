@@ -4,7 +4,7 @@ import SpotifyWebApi from "spotify-web-api-node";
 import { Track, Player } from "../components";
 import { SPOTIFY_CLIENT_ID } from "../constants";
 import axios from "axios";
-import './index.css'
+import "./index.css";
 
 const spotifyApi = new SpotifyWebApi({
     clientId: SPOTIFY_CLIENT_ID,
@@ -25,31 +25,36 @@ const Home = () => {
 
     const fetchPopularTracks = () => {
         spotifyApi
-          .getPlaylistTracks('37i9dQZEVXbMDoHDwVN2tF') // playlist ID 
-          .then((res) => {
-            setSearchResults(
-              res.body.items.map((item) => {
-                const track = item.track;
-                return {
-                  artist: track.artists[0].name,
-                  title: track.name,
-                  uri: track.uri,
-                  albumImage: track.album.images[0]?.url,
-                };
-              })
-            );
-          })
-          .catch((err) => setResponseError(err));
-      };
+            .getPlaylistTracks("37i9dQZEVXbMDoHDwVN2tF")
+            .then((res) => {
+                setSearchResults(
+                    res.body.items.map((item) => {
+                        const track = item.track;
+                        return {
+                            artist: track.artists[0].name,
+                            title: track.name,
+                            uri: track.uri,
+                            albumImage: track.album.images[0]?.url,
+                        };
+                    })
+                );
+            })
+            .catch((err) => setResponseError(err));
+    };
 
-    useEffect(() => {fetchPopularTracks();}, []);
+    useEffect(() => {
+        fetchPopularTracks();
+    }, []);
 
     const accessToken = localStorage.getItem("accessToken");
     spotifyApi.setAccessToken(accessToken);
 
     useEffect(() => {
         const debounceTimer = setTimeout(() => {
-            if (!search) return;
+            if (!search) {
+                fetchPopularTracks();
+                return;
+            }
             spotifyApi
                 .searchTracks(search)
                 .then((res) => {
@@ -90,32 +95,43 @@ const Home = () => {
         <>
             <Container
                 className="d-flex flex-column gap-3 general"
-                style={{ height: "100vh", background: "#1a1a1a", maxWidth:"100%", color: "white", padding: "50px", paddingBottom:"80px" }}
+                style={{
+                    // height: "100vh",
+                    // background: "#1a1a1a",
+                    maxWidth: "100%",
+                    color: "white",
+                    padding: "50px",
+                    paddingBottom: "80px",
+                }}
             >
-            <Form.Control
-                type="search"
-                placeholder="Search for a song"
-                className="searchField"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                style={{ background: "#242424", 
-                color: "white", 
-                maxWidth:"350px",
-                fontSize: "16px", }}
-                
-            />
-                <h4 style={{margin:"0px"}}>
-                {search.length > 0 && !responseError ? (
-                    searchResults.length > 0 ? (
-                    <p style={{margin:"0px"}}>Search results:</p>
+                <Form.Control
+                    type="search"
+                    placeholder="Search for a song"
+                    className="searchField"
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                    style={{
+                        background: "#242424",
+                        color: "white",
+                        maxWidth: "350px",
+                        fontSize: "16px",
+                    }}
+                />
+                <h4 style={{ margin: "0px" }}>
+                    {search.length > 0 && !responseError ? (
+                        searchResults.length > 0 ? (
+                            <p style={{ margin: "0px" }}>Search results:</p>
+                        ) : (
+                            <p style={{ margin: "0px" }}>No results found</p>
+                        )
                     ) : (
-                    <p style={{margin:"0px"}}>No results found</p>
-                    )
-                ) : (
-                    <p style={{margin:"0px"}}>Recommended tracks:</p>
-                )}
+                        <p style={{ margin: "0px" }}>Recommended tracks:</p>
+                    )}
                 </h4>
-                <div className="flex-grow-1 my-2" style={{ overflowY:"scroll"}}>
+                <div
+                    className="flex-grow-1 my-2"
+                    style={{ overflowY: "scroll" }}
+                >
                     {searchResults.length > 0 &&
                         !responseError &&
                         searchResults.map((track) => (
@@ -124,6 +140,7 @@ const Home = () => {
                                 key={track.uri}
                                 chooseTrack={chooseTrack}
                                 playlists={playlists}
+                                addPlaylist={true}
                             />
                         ))}
                     <p>{responseError && !!responseError}</p>

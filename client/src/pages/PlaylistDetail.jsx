@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { Container } from "react-bootstrap";
+import { Track } from "../components";
 
 const PlaylistDetail = () => {
     const { id } = useParams();
@@ -32,7 +34,7 @@ const PlaylistDetail = () => {
                 const data = response.data;
 
                 const zippedData = zipArraysIntoObjects(
-                    ["artist", "picture", "title", "uri"],
+                    ["artist", "albumImage", "title", "uri"],
                     [
                         data.songAuthors,
                         data.songPictures,
@@ -50,23 +52,30 @@ const PlaylistDetail = () => {
         fetchData();
     }, []);
 
-    console.log(playlistData);
-
     return (
-        <>
-            <h1>{playlistName}</h1>
+        <Container
+            className="d-flex flex-column gap-3 general"
+            style={{
+                height: "100vh",
+                background: "#1a1a1a",
+                maxWidth: "100%",
+                color: "white",
+                padding: "50px",
+                paddingBottom: "80px",
+            }}
+        >
+            <h2>{playlistName}</h2>
             {playlistData.length > 0 &&
                 playlistData.map((track) => (
-                    <div>
-                        <h2>{track.artist}</h2>
-                        <h2>{track.title}</h2>
-                        <img
-                            src={track.picture}
-                            style={{ height: "100px", width: "100px" }}
-                        />
-                    </div>
+                    <Track
+                        track={track}
+                        key={track.uri}
+                        // chooseTrack={chooseTrack}
+                        playlists={[]}
+                        addPlaylist={false}
+                    />
                 ))}
-        </>
+        </Container>
     );
 };
 

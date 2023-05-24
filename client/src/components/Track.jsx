@@ -1,9 +1,14 @@
 import React, { useState } from "react";
 import { Modal, Row } from "react-bootstrap";
 import ModalPlaylist from "./ModalPlaylist";
-import "./components.css"
+import "./components.css";
 
-export default function TrackSearchResult({ track, chooseTrack, playlists }) {
+export default function TrackSearchResult({
+    track,
+    chooseTrack,
+    playlists,
+    addPlaylist,
+}) {
     const [showDialog, setShowDialog] = useState(false);
 
     const handlePlay = () => {
@@ -34,22 +39,22 @@ export default function TrackSearchResult({ track, chooseTrack, playlists }) {
             >
                 <img
                     src={track.albumImage}
-                    style={{ height: "64px", width: "64px"}}
+                    style={{ height: "64px", width: "64px" }}
                 />
                 <div className="ml-3">
                     <div>{track.artist}</div>
                     <div className="text-muted">{track.title}</div>
                 </div>
             </div>
-
-            <div className="addButton"> 
-                <span
-                    onClick={handleDialogToggle}
-                    className="bi bi-plus plusToggle"
-                    style={{ fontSize: "24px", }}
-                ></span>
-            </div>
-
+            {addPlaylist && (
+                <div className="addButton">
+                    <span
+                        onClick={handleDialogToggle}
+                        className="bi bi-plus plusToggle"
+                        style={{ fontSize: "24px" }}
+                    ></span>
+                </div>
+            )}
             <Modal show={showDialog} onHide={handleDialogToggle}>
                 <Modal.Header closeButton>
                     <Modal.Title>Choose playlist to add:</Modal.Title>

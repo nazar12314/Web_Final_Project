@@ -24,10 +24,7 @@ const Playlists = () => {
 
     return (
         <Container>
-            <div>
-                <h1>Create New Playlist</h1>
-                <PlaylistForm />
-            </div>
+            <PlaylistForm />
             <PlaylistBar
                 playlists={playlists}
                 handleDeletePlaylist={handleDeletePlaylist}

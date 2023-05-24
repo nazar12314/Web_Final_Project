@@ -1,90 +1,86 @@
 /* Set the width and height of the scrollbar */
 ::-webkit-scrollbar {
-width: 8px;
-background-color: transparent;
+    width: 8px;
+    background-color: transparent;
 }
 
 /* Style the track (background) */
 ::-webkit-scrollbar:before {
-background-color: #282828;
-opacity: 0.7;
+    background-color: #282828;
+    opacity: 0.7;
 }
 
 /* Style the thumb (handle) */
 ::-webkit-scrollbar-thumb {
-background-color: #b3b3b3;
-opacity: 0.7;
+    background-color: #b3b3b3;
+    opacity: 0.7;
 }
 
 /* Style the thumb on hover */
 ::-webkit-scrollbar:hover {
-opacity: 2;
+    opacity: 2;
 }
-  
+
 input[type="search"]:hover {
     border-color: #08fb00a4;
     background-color: #830838;
-  }
+}
 
 input[type="search"]:focus {
     border-color: green;
-  }
-
-
-.homeText-p{
-    margin: 0px;
 }
 
-
+.homeText-p {
+    margin: 0px;
+}
 
 .loginContainer {
     background: linear-gradient(175deg, rgb(30, 30, 30), rgb(0, 0, 0));
     color: #fff;
-  }
-  
-  .loginContainer h1 {
+}
+
+.loginContainer h1 {
     color: #fff;
-  }
-  
-  .loginContainer input[type="text"],
-  .loginContainer input[type="password"],
-  .loginContainer button {
+}
+
+.loginContainer input[type="text"],
+.loginContainer input[type="password"],
+.loginContainer button {
     background-color: #222;
     color: #fff;
 
     border: 0.5px solid rgba(255, 255, 255, 0.755);
-  }
-  
-  .loginContainer input[type="text"]::placeholder,
-  .loginContainer input[type="password"]::placeholder {
+}
+
+.loginContainer input[type="text"]::placeholder,
+.loginContainer input[type="password"]::placeholder {
     color: #767676;
-  }
-  
-  .loginContainer input[type="text"]:hover,
-  .loginContainer input[type="password"]:hover {
+}
+
+.loginContainer input[type="text"]:hover,
+.loginContainer input[type="password"]:hover {
     border-radius: 5px;
     border: 1px solid white;
-  }
+}
 
-  .loginContainer input[type="text"]:focus,
-  .loginContainer input[type="password"]:focus {
+.loginContainer input[type="text"]:focus,
+.loginContainer input[type="password"]:focus {
     background-color: #555;
-  }
-  
-  .loginContainer a {
-    color: #f1f1f1;
-  }
-  
-  .loginContainer a:hover {
-    color: #00ff11c6;
-  }
-  
-  .loginContainer p {
-    color: red;
-  }
+}
 
-  
-  .loginContainer button {
+.loginContainer a {
+    color: #f1f1f1;
+}
+
+.loginContainer a:hover {
+    color: #00ff11c6;
+}
+
+.loginContainer p {
+    color: red;
+}
+
+.loginContainer button {
     background-color: green;
     color: #ffffff;
     font-size: 18px;
@@ -93,61 +89,58 @@ input[type="search"]:focus {
     border-radius: 30px;
     transition: background-color 0.3s ease;
 }
-  
-  .loginContainer button:hover {
+
+.loginContainer button:hover {
     background-color: rgb(21, 188, 21);
     cursor: pointer;
-  }
-  
+}
 
-
-
-  .signUpContainer {
+.signUpContainer {
     background: linear-gradient(175deg, rgb(30, 30, 30), rgb(0, 0, 0));
     color: #fff;
-  }
-  
-  .signUpContainer h1 {
+}
+
+.signUpContainer h1 {
     color: #fff;
-  }
-  
-  .signUpContainer input[type="text"],
-  .signUpContainer input[type="password"],
-  .signUpContainer button {
+}
+
+.signUpContainer input[type="text"],
+.signUpContainer input[type="password"],
+.signUpContainer button {
     background-color: #222;
     color: #fff;
     border: 0.5px solid rgba(255, 255, 255, 0.755);
-  }
-  
-  .signUpContainer input[type="text"]::placeholder,
-  .signUpContainer input[type="password"]::placeholder {
+}
+
+.signUpContainer input[type="text"]::placeholder,
+.signUpContainer input[type="password"]::placeholder {
     color: #999;
-  }
-  
-  .signUpContainer input[type="text"]:hover,
-  .signUpContainer input[type="password"]:hover {
+}
+
+.signUpContainer input[type="text"]:hover,
+.signUpContainer input[type="password"]:hover {
     border-radius: 5px;
     border: 1px solid white;
-  }
-  
-  .signUpContainer input[type="text"]:focus,
-  .signUpContainer input[type="password"]:focus {
+}
+
+.signUpContainer input[type="text"]:focus,
+.signUpContainer input[type="password"]:focus {
     background-color: #555;
-  }
-  
-  .signUpContainer a {
+}
+
+.signUpContainer a {
     color: #f1f1f1;
-  }
-  
-  .signUpContainer a:hover {
+}
+
+.signUpContainer a:hover {
     color: #00ff119e;
-  }
-  
-  .signUpContainer p {
+}
+
+.signUpContainer p {
     color: red;
-  }
-  
-  .signUpContainer button {
+}
+
+.signUpContainer button {
     background-color: green;
     color: #ffffff;
     font-size: 18px;
@@ -155,10 +148,22 @@ input[type="search"]:focus {
     padding: 10px 20px;
     border-radius: 30px;
     transition: background-color 0.3s ease;
-  }
-  
-  .signUpContainer button:hover {
+}
+
+.signUpContainer button:hover {
     background-color: rgb(21, 188, 21);
     cursor: pointer;
-  }
-  
+}
+
+body {
+    background-color: #1a1a1a;
+}
+
+input[type="search"] {
+    border-radius: 25px;
+    height: 50px;
+}
+
+.col {
+    background-color: transparent;
+}

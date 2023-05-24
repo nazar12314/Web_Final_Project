@@ -3,30 +3,40 @@ import { Link } from "react-router-dom";
 
 function Playlist({ playlist, onDelete }) {
     return (
-        <Col md={5}>
-            <Link
-                to={`/playlist/${playlist._id}`}
-                className="d-flex align-items-center"
-                style={{
-                    height: "100px",
-                    justifyContent: "space-between",
-                }}
-            >
+        <Col
+            md={5}
+            className="d-flex align-items-center"
+            style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignContent: "center",
+                // backgroundColor: "#3b3b3b",
+                flexDirection: "column",
+                borderRadius: "7px",
+                color: "wheat",
+                textDecoration: "none",
+            }}
+        >
+            <Link to={`/playlist/${playlist._id}`}>
                 {playlist.songs.length < 1 ? (
-                    <div
+                    <img
+                        src={
+                            "https://i.scdn.co/image/ab67706c0000da8472badcebb8ffa6cd66172621"
+                        }
                         style={{
-                            height: "100%",
-                            width: "100px",
-                            backgroundColor: "black",
+                            height: "150px",
+                            width: "150px",
                         }}
-                    ></div>
+                    ></img>
                 ) : (
                     <img
                         src={playlist.songPictures[0]}
-                        style={{ height: "100%", width: "100px" }}
+                        style={{ height: "100%", width: "150px" }}
                     ></img>
                 )}
+            </Link>
 
+            <div style={{ display: "flex", gap: "10px" }}>
                 <div className="ml-3">
                     <div>{playlist.name}</div>
                 </div>
@@ -35,7 +45,7 @@ function Playlist({ playlist, onDelete }) {
                     className="bi bi-trash"
                     style={{ cursor: "pointer", color: "red" }}
                 ></i>
-            </Link>
+            </div>
         </Col>
     );
 }

@@ -1,6 +1,7 @@
 import { React, useState } from "react";
-import { Form, Button, Col, Row } from "react-bootstrap";
+import { Form, Button, Col, Row, Container } from "react-bootstrap";
 import axios from "axios";
+import "./components.css";
 
 const PlaylistForm = () => {
     const [playlistName, setPlaylistName] = useState("");
@@ -24,27 +25,40 @@ const PlaylistForm = () => {
     };
 
     return (
-        <Form>
-            <Row>
-                <Form.Group controlId="playlistName" as={Col} md={8}>
-                    <Form.Label></Form.Label>
+        <Form
+            className="formClass"
+            styles={{
+                display: "flex",
+                alignItems: "flex-start",
+                flexDirection: "row",
+            }}
+        >
+            <Col
+                style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    marginTop: "30px",
+                    gap: "10px",
+                }}
+            >
+                <Form.Group controlId="playlistName">
                     <Form.Control
                         type="text"
                         value={playlistName}
                         onChange={handleInputChange}
-                        placeholder="Playlist Name:"
+                        placeholder="Playlist Name"
+                        className="spotify-input"
                     />
                 </Form.Group>
                 <Button
                     variant="dark"
                     type="submit"
-                    as={Col}
-                    md={4}
                     onClick={handleSubmit}
+                    className="spotify-button"
                 >
                     Create Playlist
                 </Button>
-            </Row>
+            </Col>
         </Form>
     );
 };
